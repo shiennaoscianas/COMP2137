@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#Assignment 2 - System Modification
+#Assignment 2 - System Modification - Shienna Oscianas
+
 #This is for checking if there is a netplan configuration file.
 netplan_file="/etc/netplan/50-cloud-init.yaml"
 if [ ! -f "$netplan_file" ]; then
@@ -9,12 +10,12 @@ if [ ! -f "$netplan_file" ]; then
 fi
 
 #This is to specify the updated 192.168.16 network interface settings.
-new_config="  addresses:
-    - 192.168.16.21/24
-  gateway4: 192.168.16.2
-  nameservers:
-    addresses: [192.168.16.2]
-    search: [home.arpa, localdomain]"
+new_config="
+	addresses: 192.168.16.21/24
+  	gateway4: 192.168.16.2
+  	nameservers:
+    	addresses: [192.168.16.2]
+    	search: [home.arpa, localdomain]"
 
 #This defines the network interface for private management.
 #This has been replaced with the actual interface name
@@ -175,10 +176,10 @@ else
 fi
 
 #To define the userid
-userid="dennis"
+	userid="dennis"
 
 #To define the public key
-public_key="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4rT3vTt99Ox5kndS4HmgTrKBT8SKzhK4rhGkEVGlCI student@generic-vm"
+	public_key="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIG4rT3vTt99Ox5kndS4HmgTrKBT8SKzhK4rhGkEVGlCI student@generic-vm"
 
 #To check if the user exists
 if ! id "$userid" &>/dev/null; then
