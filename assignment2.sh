@@ -1,24 +1,38 @@
 #!/bin/bash
-
 #Assignment 2 - System Modification - Shienna Oscianas
 
+<<<<<<< HEAD
+#Assignment 2 - System Modification - Shienna Oscianas
+
+=======
+#-----------------------------------------------------------------
+>>>>>>> 50f0e83 (This is my script for assignment2)
 #This is for checking if there is a netplan configuration file.
+
 netplan_file="/etc/netplan/50-cloud-init.yaml"
 if [ ! -f "$netplan_file" ]; then
     echo "The Netplan configuration file not found: $netplan_file"
     exit 1
 fi
 
+<<<<<<< HEAD
 #This is to specify the updated 192.168.16 network interface settings.
+=======
+#Specify the updated network interface settings
+>>>>>>> 50f0e83 (This is my script for assignment2)
 new_config="
 	addresses: 192.168.16.21/24
   	gateway4: 192.168.16.2
   	nameservers:
+<<<<<<< HEAD
     	addresses: [192.168.16.2]
     	search: [home.arpa, localdomain]"
+=======
+    		addresses: [192.168.16.2]
+    		search: [home.arpa, localdomain]"
+>>>>>>> 50f0e83 (This is my script for assignment2)
 
-#This defines the network interface for private management.
-#This has been replaced with the actual interface name
+#Define the network interface for private management
 private_mgmt_interface="eth0"  
 
 #Apply the updated settings to the netplan configuration.
@@ -31,6 +45,10 @@ echo "192.168.16.21    server1" | sudo tee -a /etc/hosts >/dev/null  # Add new >
 #Implement the netplan configuration.
 sudo netplan apply
 echo "The Configuration has been updated successfully."
+
+
+#-----------------------------------------------------------------
+#To check the installed software
 
 #To update package index
 sudo apt update
@@ -101,7 +119,10 @@ if systemctl is-active --quiet squid; then
 else
     echo "There is no Squid instance running."
 fi
-#This is for the Firewall Script
+
+#-----------------------------------------------------------------
+#This set of scripts is for the Firewall.
+
 #To enable ufw
 sudo ufw enable
 
@@ -124,7 +145,10 @@ sudo ufw reload
 sudo ufw status verbose
 
 
-#This is the user list that will be created.
+#-----------------------------------------------------------------
+#This script are for the users created with the following configurations.
+
+#user list that will be created.
 usernames=("dennis" "aubrey" "captain" "snibbles" "brownie" "scooter" "sandy" "perrier" "cindy" "tiger" "yoda")
 
 #To create users with home directory and bash shell
