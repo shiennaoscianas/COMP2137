@@ -1,17 +1,22 @@
 #!/bin/bash
 
 # Function to log changes to syslog
+# if changes are made, this is sent to the system log describing the changes
 log_changes() {
     local message=$1
     logger -t configure-host.sh "$message"
 }
+
+#----------------------------------------------------
 
 # Function to check if verbose mode is enabled
 is_verbose() {
     [[ $verbose == "true" ]]
 }
 
-# Function to update hostname
+#----------------------------------------------------
+
+# Function to update name desiredName
 update_hostname() {
     local desired_name=$1
     local current_hostname=$(hostname)
@@ -25,7 +30,9 @@ update_hostname() {
     fi
 }
 
-# Function to update IP address
+#----------------------------------------------------
+
+# Function to update ip desiredIPAddress
 update_ip() {
     local desired_ip=$1
     local current_ip=$(hostname -I | awk '{print $1}')
@@ -40,7 +47,9 @@ update_ip() {
     fi
 }
 
-# Function to update host entry
+#----------------------------------------------------
+
+# Function to update hostentry desiredName desiredIPAddress
 update_host_entry() {
     local desired_name=$1
     local desired_ip=$2
@@ -53,7 +62,10 @@ update_host_entry() {
     fi
 }
 
+#----------------------------------------------------
+
 # Handle SIGTERM, SIGINT, and SIGHUP signals
+# The script must ignore TERM, HUP and INT signals.
 trap '' SIGTERM SIGINT SIGHUP
 
 # Parse command line arguments
@@ -87,6 +99,8 @@ while [[ $# -gt 0 ]]; do
         ;;
     esac
 done
+
+#----------------------------------------------------
 
 # Apply configurations
 if [ -n "$desired_name" ]; then
